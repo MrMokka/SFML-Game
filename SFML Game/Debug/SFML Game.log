@@ -1,0 +1,14 @@
+﻿C:\Program Files (x86)\Microsoft Visual Studio\2017\Community\Common7\IDE\VC\VCTargets\Microsoft.CppBuild.targets(391,5): warning MSB8028: The intermediate directory (Debug\) contains files shared from another project (Project1.vcxproj).  This can lead to incorrect clean and rebuild behavior.
+  Coin.cpp
+d:\c++ projects\sfml game\sfml game\coin.cpp(54): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+d:\c++ projects\sfml game\sfml game\coin.cpp(55): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+  Entity.cpp
+  Game.cpp
+d:\c++ projects\sfml game\sfml game\game.cpp(114): warning C4018: '<': signed/unsigned mismatch
+  GameObject.cpp
+  main.cpp
+  Player.cpp
+d:\c++ projects\sfml game\sfml game\player.cpp(106): warning C4018: '<': signed/unsigned mismatch
+  Settings.cpp
+  Generating Code...
+  SFML Game.vcxproj -> D:\c++ projects\SFML Game\Debug\SFML Game.exe

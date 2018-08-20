@@ -1,0 +1,139 @@
+#include "Player.hpp"
+#include <SFML/Graphics.hpp>
+#include "Coin.hpp"
+#include <cmath>
+
+#include <iostream>
+
+
+Player::Player(float size){
+	this->size = size;
+	color = sf::Color::Red;
+
+	body.setRadius(this->size);
+	body.setFillColor(sf::Color(255, 0, 0));
+
+	if(!tx.loadFromFile("Sprites/Player.png")){
+		std::cout << "Did not find player sprite" << std::endl;
+	}
+
+	sprite.setTexture(tx);
+	sprite.setScale(sf::Vector2f(0.5f, 0.5f));
+	sprite.setOrigin(sf::Vector2f(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2));
+	sprite.setPosition(0, 0);
+
+	xPos = 50;
+	yPos = 50;
+
+	moveSpeed = 100;
+	moveBonus = 5.0;
+
+	//std::cout << "Player Created" << std::endl;
+
+}
+
+
+void Player::UpdatePlayer(float deltaTime){
+	MovePlayer(deltaTime);
+}
+
+
+void Player::MovePlayer(float deltaTime){
+
+	sf::Vector2f dir;
+	float moveBoost = 1.0f;
+
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::D)) dir.x += 1;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::A)) dir.x -= 1;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::W)) dir.y -= 1;
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::S)) dir.y += 1;
+
+	if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) moveBoost = moveBonus;
+
+	//float mouseX = sf::Mouse::getPosition()
+
+
+	//Vector2 facingVec = playerVec - objVec;
+	//obj.Rotation = MathHelper.ToDegrees((float)Math.Atan2(facingVec.Y, facingVec.X));
+
+	//sf::Vector2f faceVec = sf::Vector2f(xPos, yPos) - sf::Vector2f();
+
+	if(dir.x != 0 && dir.y != 0){
+		dir.x *= 0.71f;
+		dir.y *= 0.71f;
+	}
+
+	xPos += dir.x * moveSpeed * moveBoost * deltaTime;
+	yPos += dir.y * moveSpeed * moveBoost * deltaTime;
+
+	UpdateCollision();
+
+	std::cout << xPos << " : " << yPos << std::endl;
+
+	body.setPosition(xPos - size, yPos - size);
+	sprite.setPosition(xPos, yPos);
+}
+
+void Player::draw(sf::RenderWindow& windowRef){
+	
+	//windowRef.draw(body);
+	windowRef.draw(sprite);
+
+}
+
+
+void Player::UpdateCollision(){
+	
+	if((xPos - size) < 0) xPos = size;
+	if((yPos - size) < 0) yPos = size;
+
+	int width = Settings::getWindowWidth();
+	int height = Settings::getWindowHeigth();
+
+	if((xPos + size) > width) xPos = width - size;
+	if((yPos + size) > height) yPos = height - size;
+	
+}
+
+void Player::rotate(){
+
+}
+
+
+
+void Player::collide(std::vector<GameObject*> gameObjects){
+
+	for(int i = 0; i < gameObjects.size(); i++) {
+		//std::cout << entities[i] << std::endl;
+		//std::cout << this << std::endl;
+		if(gameObjects[i] == this){
+			//std::cout << "Player found itself" << std::endl;
+			continue;
+		}
+		Coin* c = dynamic_cast<Coin*>(gameObjects[i]);
+		if(c != 0){
+			//std::cout << "Found Coin!" << std::endl;
+			float cX = c->getXPos();
+			float cY = c->getYPos();
+			float cS = c->getSize();
+
+			float dx = cX - xPos;
+			float dy = cY - yPos;
+			float dis = std::sqrt((dx * dx) + (dy * dy));
+			//std::cout << cX << " : " << cY << " : " << dis << std::endl;
+
+
+			if(dis <= (cS + size)){
+				//std::cout << "Colliding with coin" << std::endl;
+				c->respawn();
+				Settings::addScore(1);
+			}
+			
+		}
+
+		//typeid(entities[i])
+	}
+
+}
+
+
