@@ -1,11 +1,13 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
+//#define M_PI 3.141592653589793238463
+
 #include "Entity.hpp"
 
 class Player: public Entity {
 public:
-	Player(float size);
+	Player(GameObject::createOptions options);
 	void UpdatePlayer(float deltaTime);
 	void draw(sf::RenderWindow& windowRef);
 	void collide(std::vector<GameObject*> gameObjects);
@@ -18,9 +20,6 @@ private:
 	sf::Vector2f moveDir;
 	float moveSpeed;
 	float moveBonus;
-
-	float xPos;
-	float yPos;
 
 	void MovePlayer(float deltaTime);
 	void UpdateCollision();

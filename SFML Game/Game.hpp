@@ -20,8 +20,12 @@ private:
 	void UpdateFrames();
 	void drawLoop(sf::RenderWindow& w);
 	void collisionUpdate();
+	void loadSprites();
 
 	std::vector<GameObject*> gameObjects;
+
+	std::map<std::string, sf::Sprite> spriteMap;
+	std::pair<std::map<std::string, sf::Sprite>::iterator, bool> mapResult;
 
 };
 

@@ -16,8 +16,7 @@ void Game::Run() {
 
 	Settings::setRenderWindow(&window);
 
-	window.setFramerateLimit(60);
-
+	//window.setFramerateLimit(60);
 
 	sf::Font font;
 	if(!font.loadFromFile("Gasalt-Regular.ttf")){
@@ -37,7 +36,13 @@ void Game::Run() {
 	frameCounter.setString("FPS: " + std::to_string((int)0));
 	fpsUpdater = 0;
 
-	Player player(10);
+	GameObject::createOptions options = GameObject::createOptions();
+	options.size = 10;
+	options.xPos = 200;
+	options.yPos = 300;
+
+
+	Player player(options);
 	Coin coin(5);
 
 	gameObjects.push_back(&coin);
@@ -77,6 +82,33 @@ void Game::Run() {
 
 		window.display();
 	}
+}
+
+
+void Game::loadSprites(){
+	sf::Texture tx;
+	sf::Sprite sp;
+
+	#pragma region Player Sprite
+	if(tx.loadFromFile("Sprites/Player.png")){
+		std::cout << "Player sprite loaded" << std::endl;
+		sp.setTexture(tx);
+		sp.setScale(sf::Vector2f(0.5f, 0.5f));
+		sp.setOrigin(sf::Vector2f(sp.getLocalBounds().width / 2, sp.getLocalBounds().height / 2));
+		sp.setPosition(0, 0);
+		mapResult = spriteMap.insert(std::pair<std::string, sf::Sprite>("Player", sp));
+	} else {
+		std::cout << "Did not find player sprite" << std::endl;
+	}
+	
+
+
+	
+	#pragma endregion
+
+	
+
+	
 }
 
 

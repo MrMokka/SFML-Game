@@ -2,8 +2,13 @@
 
 
 
-GameObject::GameObject(){
 
+GameObject::GameObject(){
+}
+
+GameObject::GameObject(float xPos, float yPos){
+	this->xPos = xPos;
+	this->yPos = yPos;
 }
 
 GameObject::~GameObject(){

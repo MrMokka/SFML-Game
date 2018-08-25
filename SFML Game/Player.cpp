@@ -3,15 +3,19 @@
 #include "Coin.hpp"
 #include <cmath>
 
+#define _USE_MATH_DEFINES
+#include <math.h>
+
 #include <iostream>
 
 
-Player::Player(float size){
-	this->size = size;
-	color = sf::Color::Red;
+Player::Player(GameObject::createOptions options){
+	this->size = options.size;
+	this->xPos = options.xPos;
+	this->yPos = options.yPos;
+
 
 	body.setRadius(this->size);
-	body.setFillColor(sf::Color(255, 0, 0));
 
 	if(!tx.loadFromFile("Sprites/Player.png")){
 		std::cout << "Did not find player sprite" << std::endl;
@@ -22,11 +26,8 @@ Player::Player(float size){
 	sprite.setOrigin(sf::Vector2f(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2));
 	sprite.setPosition(0, 0);
 
-	xPos = 50;
-	yPos = 50;
-
-	moveSpeed = 100;
-	moveBonus = 5.0;
+	moveSpeed = 150;
+	moveBonus = 2.0;
 
 	//std::cout << "Player Created" << std::endl;
 
@@ -50,13 +51,17 @@ void Player::MovePlayer(float deltaTime){
 
 	if(sf::Keyboard::isKeyPressed(sf::Keyboard::LShift)) moveBoost = moveBonus;
 
-	//float mouseX = sf::Mouse::getPosition()
+	
+	sf::Vector2i mousePos = sf::Mouse::getPosition(*Settings::getRenderWindow());
 
+	sf::Vector2f targetVec = sf::Vector2f(mousePos.x, mousePos.y);
+	sf::Vector2f playerVec = sf::Vector2f(xPos, yPos);
 
-	//Vector2 facingVec = playerVec - objVec;
-	//obj.Rotation = MathHelper.ToDegrees((float)Math.Atan2(facingVec.Y, facingVec.X));
+	sf::Vector2f facingVec = playerVec - targetVec;
+	
+	float rotation = atan2(facingVec.x, facingVec.y) * (180 / M_PI);
 
-	//sf::Vector2f faceVec = sf::Vector2f(xPos, yPos) - sf::Vector2f();
+	sprite.setRotation(-rotation);
 
 	if(dir.x != 0 && dir.y != 0){
 		dir.x *= 0.71f;
@@ -68,7 +73,7 @@ void Player::MovePlayer(float deltaTime){
 
 	UpdateCollision();
 
-	std::cout << xPos << " : " << yPos << std::endl;
+	//std::cout << xPos << " : " << yPos << std::endl;
 
 	body.setPosition(xPos - size, yPos - size);
 	sprite.setPosition(xPos, yPos);

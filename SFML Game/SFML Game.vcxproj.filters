@@ -13,7 +13,10 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="Source Files\Entity">
+    <Filter Include="Source Files\GameObject">
+      <UniqueIdentifier>{4eea8511-5af0-4e04-aac3-bfbea33d3a5b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\GameObject\Entity">
       <UniqueIdentifier>{4a198c86-7408-4970-b4e2-f386ae8b96ff}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
@@ -28,15 +31,18 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Coin.cpp">
-      <Filter>Source Files\Entity</Filter>
+      <Filter>Source Files\GameObject\Entity</Filter>
     </ClCompile>
     <ClCompile Include="Entity.cpp">
-      <Filter>Source Files\Entity</Filter>
+      <Filter>Source Files\GameObject\Entity</Filter>
     </ClCompile>
     <ClCompile Include="Player.cpp">
-      <Filter>Source Files\Entity</Filter>
+      <Filter>Source Files\GameObject\Entity</Filter>
     </ClCompile>
     <ClCompile Include="GameObject.cpp">
+      <Filter>Source Files\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Bullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -57,6 +63,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="GameObject.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Bullet.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
