@@ -82,14 +82,11 @@ void Game::Run() {
 
 		scoreText.setString("Score: " + std::to_string(Settings::getScore()));
 
-		//player.UpdatePlayer(deltaTime);
-
 		//Draw objects
 		
 		drawLoop(window);
 		window.draw(frameCounter);
 		window.draw(scoreText);
-		//player.draw(window);
 
 		window.display();
 	}
