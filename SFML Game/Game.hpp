@@ -7,6 +7,8 @@ class Game{
 public:
 	void Run();
 
+	
+
 private:
 	sf::Text scoreText;
 
@@ -24,8 +26,10 @@ private:
 
 	std::vector<GameObject*> gameObjects;
 
-	std::map<std::string, sf::Sprite> spriteMap;
-	std::pair<std::map<std::string, sf::Sprite>::iterator, bool> mapResult;
+	sf::Texture* getTexture(std::string key);
+
+	std::map<std::string, sf::Texture> textureMap;
+	std::pair<std::map<std::string, sf::Texture>::iterator, bool> mapResult;
 
 };
 

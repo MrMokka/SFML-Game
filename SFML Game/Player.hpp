@@ -26,7 +26,7 @@ private:
 	void rotate();
 
 	sf::CircleShape body;
-
+	
 	sf::Texture tx;
 	sf::Sprite sprite;
 

@@ -13,13 +13,10 @@ Player::Player(GameObject::createOptions options){
 	this->size = options.size;
 	this->xPos = options.xPos;
 	this->yPos = options.yPos;
-
+	
+	tx = *options.texture;
 
 	body.setRadius(this->size);
-
-	if(!tx.loadFromFile("Sprites/Player.png")){
-		std::cout << "Did not find player sprite" << std::endl;
-	}
 
 	sprite.setTexture(tx);
 	sprite.setScale(sf::Vector2f(0.5f, 0.5f));

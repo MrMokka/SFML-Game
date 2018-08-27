@@ -16,17 +16,19 @@ void Game::Run() {
 
 	Settings::setRenderWindow(&window);
 
-	//window.setFramerateLimit(60);
+	window.setFramerateLimit(60);
 
 	sf::Font font;
 	if(!font.loadFromFile("Gasalt-Regular.ttf")){
 		std::cout << "Error loading Font!" << std::endl;
 	}
 
+	loadSprites();
+
 	scoreText.setFont(font);
 	scoreText.setCharacterSize(20);
 	scoreText.setFillColor(sf::Color::White);
-	scoreText.setPosition(((float) Settings::getWindowWidth() / 3), 10.0f);
+	scoreText.setPosition(((float)Settings::getWindowWidth() / 3), 10.0f);
 	scoreText.setString("Score: " + std::to_string(Settings::getScore()));
 
 	frameCounter.setFont(font);
@@ -36,10 +38,14 @@ void Game::Run() {
 	frameCounter.setString("FPS: " + std::to_string((int)0));
 	fpsUpdater = 0;
 
+
+
 	GameObject::createOptions options = GameObject::createOptions();
 	options.size = 10;
 	options.xPos = 200;
 	options.yPos = 300;
+
+	options.texture = getTexture("player");
 
 
 	Player player(options);
@@ -84,27 +90,48 @@ void Game::Run() {
 	}
 }
 
+sf::Texture* Game::getTexture(std::string key){
+
+	auto search = textureMap.find(key);
+	if(search != textureMap.end()) {
+		std::cout << "Found " << search->first << " " << "texture" << '\n';
+		//test = search->second;
+	}
+	else {
+		std::cout << "Not found\n";
+	}
+
+	sf::Texture* tp = &search->second;
+
+	return tp;
+}
+
 
 void Game::loadSprites(){
 	sf::Texture tx;
-	sf::Sprite sp;
 
-	#pragma region Player Sprite
-	if(tx.loadFromFile("Sprites/Player.png")){
-		std::cout << "Player sprite loaded" << std::endl;
-		sp.setTexture(tx);
+#pragma region Player Sprite
+	if(!tx.loadFromFile("Sprites/Player.png")){
+		std::cout << "Did not find player texture" << std::endl;
+	} else {
+		std::cout << "Player texture loaded" << std::endl;
+		/*sp.setTexture(tx);
 		sp.setScale(sf::Vector2f(0.5f, 0.5f));
 		sp.setOrigin(sf::Vector2f(sp.getLocalBounds().width / 2, sp.getLocalBounds().height / 2));
-		sp.setPosition(0, 0);
-		mapResult = spriteMap.insert(std::pair<std::string, sf::Sprite>("Player", sp));
-	} else {
-		std::cout << "Did not find player sprite" << std::endl;
+		sp.setPosition(0, 0);*/
+		mapResult = textureMap.insert(std::pair<std::string, sf::Texture>("player", tx));
 	}
-	
+#pragma endregion
 
-
-	
-	#pragma endregion
+#pragma region Bullet Sprite
+	if(tx.loadFromFile("Sprites/Bullet.png")){
+		std::cout << "Bullet texture loaded" << std::endl;
+		mapResult = textureMap.insert(std::pair<std::string, sf::Texture>("bullet", tx));
+	}
+	else {
+		std::cout << "Did not find bullet texture" << std::endl;
+	}
+#pragma endregion
 
 	
 
