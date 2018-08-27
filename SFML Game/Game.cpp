@@ -88,6 +88,8 @@ void Game::Run() {
 		window.draw(frameCounter);
 		window.draw(scoreText);
 
+		//std test Jus tremove this line plz :;D
+
 		window.display();
 	}
 }
