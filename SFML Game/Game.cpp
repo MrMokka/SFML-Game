@@ -4,10 +4,12 @@
 #include <string.h>
 #include "Settings.hpp"
 #include "Coin.hpp"
+#include "Bullet.hpp"
 
 #include <iostream>
 
 
+std::vector<GameObject*> Game::gameObjects;
 
 
 void Game::Run() {
@@ -47,12 +49,13 @@ void Game::Run() {
 
 	options.texture = getTexture("player");
 
+	createObject(Game::ObjectType::PLAYER, options);
 
-	Player player(options);
+	//Player player(options);
 	Coin coin(5);
 
 	gameObjects.push_back(&coin);
-	gameObjects.push_back(&player);
+	//gameObjects.push_back(&player);
 	
 
 	while(window.isOpen()) {
@@ -75,9 +78,11 @@ void Game::Run() {
 		UpdateFrames();
 		collisionUpdate();
 
+		objectLoop();
+
 		scoreText.setString("Score: " + std::to_string(Settings::getScore()));
 
-		player.UpdatePlayer(deltaTime);
+		//player.UpdatePlayer(deltaTime);
 
 		//Draw objects
 		
@@ -89,6 +94,30 @@ void Game::Run() {
 		window.display();
 	}
 }
+
+GameObject* Game::createObject(Game::ObjectType type, GameObject::createOptions options){
+	GameObject* obj;
+
+	switch(type){
+	case Game::ObjectType::PLAYER:
+		obj = new Player(options);
+		break;
+	case Game::ObjectType::COIN:
+		obj = new Coin(5.0f);
+		break;
+	case Game::ObjectType::BULLET:
+		obj = new Bullet(5.0f);
+		break;
+	default:
+		std::cout << "ERROR Creating object!" << std::endl;
+		break;
+	}
+
+	gameObjects.push_back(obj);
+
+	return obj;
+}
+
 
 sf::Texture* Game::getTexture(std::string key){
 
@@ -163,6 +192,17 @@ void Game::drawLoop(sf::RenderWindow& w){
 	for(i = gameObjects.begin(); i != gameObjects.end(); i++) {
 		GameObject* e = *i;
 		e->draw(w);
+	}
+
+}
+
+
+void Game::objectLoop(){
+
+	std::vector<GameObject*>::const_iterator i;
+	for(i = gameObjects.begin(); i != gameObjects.end(); i++) {
+		GameObject* e = *i;
+		e->update(deltaTime);
 	}
 
 }

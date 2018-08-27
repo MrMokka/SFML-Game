@@ -7,6 +7,13 @@ class Game{
 public:
 	void Run();
 
+	static enum ObjectType{
+		PLAYER,
+		COIN,
+		BULLET
+	};
+
+	static GameObject* createObject(Game::ObjectType type, GameObject::createOptions options);
 	
 
 private:
@@ -21,10 +28,11 @@ private:
 
 	void UpdateFrames();
 	void drawLoop(sf::RenderWindow& w);
+	void objectLoop();
 	void collisionUpdate();
 	void loadSprites();
 
-	std::vector<GameObject*> gameObjects;
+	static std::vector<GameObject*> gameObjects;
 
 	sf::Texture* getTexture(std::string key);
 

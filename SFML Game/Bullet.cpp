@@ -2,12 +2,7 @@
 
 
 
-Bullet::Bullet(){
-
-}
-
-
-Bullet::~Bullet(){
+Bullet::Bullet(float temp){
 
 }
 

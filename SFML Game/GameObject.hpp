@@ -14,6 +14,7 @@ public:
 	~GameObject();
 
 	virtual void draw(sf::RenderWindow& windowRef);
+	virtual void update(float deltaTime);
 	virtual void collide(std::vector<GameObject*> gameObjects);
 
 	struct createOptions{

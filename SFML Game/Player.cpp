@@ -26,17 +26,19 @@ Player::Player(GameObject::createOptions options){
 	moveSpeed = 150;
 	moveBonus = 2.0;
 
-	//std::cout << "Player Created" << std::endl;
+	std::cout << "Player Created" << std::endl;
 
 }
 
 
-void Player::UpdatePlayer(float deltaTime){
+void Player::update(float deltaTime){
 	MovePlayer(deltaTime);
 }
 
 
 void Player::MovePlayer(float deltaTime){
+
+	//std::cout << "Player Update" << std::endl;
 
 	sf::Vector2f dir;
 	float moveBoost = 1.0f;

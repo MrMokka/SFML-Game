@@ -19,6 +19,10 @@ void GameObject::draw(sf::RenderWindow& windowRef){
 	std::cout << "Entity Drawing" << std::endl;
 }
 
+void GameObject::update(float deltaTime)
+{
+}
+
 void GameObject::collide(std::vector<GameObject*> gameObjects){
 
 }
