@@ -14,6 +14,7 @@ public:
 	~GameObject();
 
 	virtual void draw(sf::RenderWindow& windowRef);
+	virtual void update(float deltaTime);
 	virtual void collide(std::vector<GameObject*> gameObjects);
 
 	struct createOptions{
@@ -21,7 +22,7 @@ public:
 		float yPos = 0;
 		float size = 0;
 		sf::Color color = sf::Color::Magenta;
-		sf::Texture texture;
+		sf::Texture* texture;
 	};
 
 private:

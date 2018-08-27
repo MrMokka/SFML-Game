@@ -7,6 +7,15 @@ class Game{
 public:
 	void Run();
 
+	static enum ObjectType{
+		PLAYER,
+		COIN,
+		BULLET
+	};
+
+	static GameObject* createObject(Game::ObjectType type, GameObject::createOptions options);
+	
+
 private:
 	sf::Text scoreText;
 
@@ -19,13 +28,16 @@ private:
 
 	void UpdateFrames();
 	void drawLoop(sf::RenderWindow& w);
+	void objectLoop();
 	void collisionUpdate();
 	void loadSprites();
 
-	std::vector<GameObject*> gameObjects;
+	static std::vector<GameObject*> gameObjects;
 
-	std::map<std::string, sf::Sprite> spriteMap;
-	std::pair<std::map<std::string, sf::Sprite>::iterator, bool> mapResult;
+	sf::Texture* getTexture(std::string key);
+
+	std::map<std::string, sf::Texture> textureMap;
+	std::pair<std::map<std::string, sf::Texture>::iterator, bool> mapResult;
 
 };
 

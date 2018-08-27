@@ -1,12 +1,12 @@
 #ifndef BULLET_H
 #define BULLET_H
 
+#include "Entity.hpp"
 
-class Bullet{
+class Bullet: public Entity {
 
 public:
-	Bullet();
-	~Bullet();
+	Bullet(float temp);
 
 
 private:

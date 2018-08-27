@@ -8,7 +8,7 @@
 class Player: public Entity {
 public:
 	Player(GameObject::createOptions options);
-	void UpdatePlayer(float deltaTime);
+	void update(float deltaTime);
 	void draw(sf::RenderWindow& windowRef);
 	void collide(std::vector<GameObject*> gameObjects);
 
@@ -26,7 +26,7 @@ private:
 	void rotate();
 
 	sf::CircleShape body;
-
+	
 	sf::Texture tx;
 	sf::Sprite sprite;
 

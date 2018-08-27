@@ -13,13 +13,10 @@ Player::Player(GameObject::createOptions options){
 	this->size = options.size;
 	this->xPos = options.xPos;
 	this->yPos = options.yPos;
-
+	
+	tx = *options.texture;
 
 	body.setRadius(this->size);
-
-	if(!tx.loadFromFile("Sprites/Player.png")){
-		std::cout << "Did not find player sprite" << std::endl;
-	}
 
 	sprite.setTexture(tx);
 	sprite.setScale(sf::Vector2f(0.5f, 0.5f));
@@ -29,17 +26,19 @@ Player::Player(GameObject::createOptions options){
 	moveSpeed = 150;
 	moveBonus = 2.0;
 
-	//std::cout << "Player Created" << std::endl;
+	std::cout << "Player Created" << std::endl;
 
 }
 
 
-void Player::UpdatePlayer(float deltaTime){
+void Player::update(float deltaTime){
 	MovePlayer(deltaTime);
 }
 
 
 void Player::MovePlayer(float deltaTime){
+
+	//std::cout << "Player Update" << std::endl;
 
 	sf::Vector2f dir;
 	float moveBoost = 1.0f;
