@@ -24,11 +24,11 @@ private:
 	float yPos;
 
 	void UpdateCollision();
-	void createSprites();
+	void textureAnimSetup();
 
-	sf::CircleShape body;
+	sf::RectangleShape body;
 
-	sf::Texture tx;
+	sf::Texture* tx;
 
 	int spriteNum = 0;
 	float rotationSpeed = 0.25f;

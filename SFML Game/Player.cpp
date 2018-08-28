@@ -12,20 +12,21 @@ Player::Player(GameObject::createOptions options){
 	this->xPos = options.xPos;
 	this->yPos = options.yPos;
 	
-	tx = *options.texture;
+	tx = options.texture;
 
-	body.setTexture(&tx);
+	body.setTexture(tx);
 	body.setSize(sf::Vector2f(size, size));
 	body.setOrigin(sf::Vector2f(size / 2, size / 2));
 	body.setPosition(xPos, yPos);
 
 	//body.setRadius(this->size);
 
+	/*
 	sprite.setTexture(tx);
 	sprite.setScale(sf::Vector2f(0.5f, 0.5f));
 	sprite.setOrigin(sf::Vector2f(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2));
 	sprite.setPosition(0, 0);
-
+	*/
 	
 
 	moveSpeed = 150;
@@ -65,7 +66,7 @@ void Player::MovePlayer(float deltaTime){
 	
 	float rotation =  atan2(facingVec.x, facingVec.y) * (180 / M_PI);
 
-	sprite.setRotation(-rotation);
+	body.setRotation(-rotation);
 
 	if(dir.x != 0 && dir.y != 0){
 		dir.x *= 0.71f;
@@ -80,7 +81,7 @@ void Player::MovePlayer(float deltaTime){
 	//std::cout << xPos << " : " << yPos << std::endl;
 
 	//body.setPosition(xPos - size, yPos - size);
-	sprite.setPosition(xPos, yPos);
+	body.setPosition(xPos, yPos);
 }
 
 void Player::draw(sf::RenderWindow& windowRef){

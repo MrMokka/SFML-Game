@@ -27,7 +27,7 @@ private:
 
 	sf::RectangleShape body;
 	
-	sf::Texture tx;
+	sf::Texture* tx;
 	sf::Sprite sprite;
 
 };

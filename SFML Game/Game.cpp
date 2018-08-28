@@ -43,14 +43,14 @@ void Game::Run() {
 
 
 	GameObject::createOptions options = GameObject::createOptions();
-	options.size = 10;
+	options.size = 32;
 	options.xPos = 200;
 	options.yPos = 300;
 	options.texture = getTexture("player");
 
 	createObject(Game::ObjectType::PLAYER, options);
 
-	options.size = 5;
+	options.size = 16;
 	options.xPos = 400;
 	options.yPos = 100;
 	options.texture = getTexture("coin");
