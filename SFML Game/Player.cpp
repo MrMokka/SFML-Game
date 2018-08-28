@@ -2,12 +2,10 @@
 #include <SFML/Graphics.hpp>
 #include "Coin.hpp"
 #include <cmath>
+#include <iostream>
 
 #define _USE_MATH_DEFINES
 #include <math.h>
-
-#include <iostream>
-
 
 Player::Player(GameObject::createOptions options){
 	this->size = options.size;
@@ -16,12 +14,19 @@ Player::Player(GameObject::createOptions options){
 	
 	tx = *options.texture;
 
-	body.setRadius(this->size);
+	body.setTexture(&tx);
+	body.setSize(sf::Vector2f(size, size));
+	body.setOrigin(sf::Vector2f(size / 2, size / 2));
+	body.setPosition(xPos, yPos);
+
+	//body.setRadius(this->size);
 
 	sprite.setTexture(tx);
 	sprite.setScale(sf::Vector2f(0.5f, 0.5f));
 	sprite.setOrigin(sf::Vector2f(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2));
 	sprite.setPosition(0, 0);
+
+	
 
 	moveSpeed = 150;
 	moveBonus = 2.0;
@@ -53,12 +58,12 @@ void Player::MovePlayer(float deltaTime){
 	
 	sf::Vector2i mousePos = sf::Mouse::getPosition(*Settings::getRenderWindow());
 
-	sf::Vector2f targetVec = sf::Vector2f(mousePos.x, mousePos.y);
+	sf::Vector2f targetVec = sf::Vector2f((float) mousePos.x, (float) mousePos.y);
 	sf::Vector2f playerVec = sf::Vector2f(xPos, yPos);
 
 	sf::Vector2f facingVec = playerVec - targetVec;
 	
-	float rotation = atan2(facingVec.x, facingVec.y) * (180 / M_PI);
+	float rotation =  atan2(facingVec.x, facingVec.y) * (180 / M_PI);
 
 	sprite.setRotation(-rotation);
 
@@ -74,14 +79,14 @@ void Player::MovePlayer(float deltaTime){
 
 	//std::cout << xPos << " : " << yPos << std::endl;
 
-	body.setPosition(xPos - size, yPos - size);
+	//body.setPosition(xPos - size, yPos - size);
 	sprite.setPosition(xPos, yPos);
 }
 
 void Player::draw(sf::RenderWindow& windowRef){
 	
-	//windowRef.draw(body);
-	windowRef.draw(sprite);
+	windowRef.draw(body);
+	//windowRef.draw(sprite);
 
 }
 

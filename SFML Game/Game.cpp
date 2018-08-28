@@ -46,15 +46,19 @@ void Game::Run() {
 	options.size = 10;
 	options.xPos = 200;
 	options.yPos = 300;
-
 	options.texture = getTexture("player");
 
 	createObject(Game::ObjectType::PLAYER, options);
 
-	//Player player(options);
-	Coin coin(5);
+	options.size = 5;
+	options.xPos = 400;
+	options.yPos = 100;
+	options.texture = getTexture("coin");
+	
+	createObject(Game::ObjectType::COIN, options);
 
-	gameObjects.push_back(&coin);
+
+	//gameObjects.push_back(&coin);
 	//gameObjects.push_back(&player);
 	
 
@@ -100,7 +104,7 @@ GameObject* Game::createObject(Game::ObjectType type, GameObject::createOptions 
 		obj = new Player(options);
 		break;
 	case Game::ObjectType::COIN:
-		obj = new Coin(5.0f);
+		obj = new Coin(options);
 		break;
 	case Game::ObjectType::BULLET:
 		obj = new Bullet(5.0f);
@@ -137,15 +141,11 @@ void Game::loadSprites(){
 	sf::Texture tx;
 
 #pragma region Player Sprite
-	if(!tx.loadFromFile("Sprites/Player.png")){
-		std::cout << "Did not find player texture" << std::endl;
-	} else {
+	if(tx.loadFromFile("Sprites/Player.png")){
 		std::cout << "Player texture loaded" << std::endl;
-		/*sp.setTexture(tx);
-		sp.setScale(sf::Vector2f(0.5f, 0.5f));
-		sp.setOrigin(sf::Vector2f(sp.getLocalBounds().width / 2, sp.getLocalBounds().height / 2));
-		sp.setPosition(0, 0);*/
 		mapResult = textureMap.insert(std::pair<std::string, sf::Texture>("player", tx));
+	} else {
+		std::cout << "Did not find Player texture" << std::endl;
 	}
 #pragma endregion
 
@@ -153,13 +153,19 @@ void Game::loadSprites(){
 	if(tx.loadFromFile("Sprites/Bullet.png")){
 		std::cout << "Bullet texture loaded" << std::endl;
 		mapResult = textureMap.insert(std::pair<std::string, sf::Texture>("bullet", tx));
-	}
-	else {
-		std::cout << "Did not find bullet texture" << std::endl;
+	} else {
+		std::cout << "Did not find Bullet texture" << std::endl;
 	}
 #pragma endregion
 
-	
+#pragma region Coin Sprite
+	if(tx.loadFromFile("Sprites/Coin.png")){
+		std::cout << "Coin texture loaded" << std::endl;
+		mapResult = textureMap.insert(std::pair<std::string, sf::Texture>("coin", tx));
+	} else {
+		std::cout << "Did not find Coin texture" << std::endl;
+	}
+#pragma endregion
 
 	
 }

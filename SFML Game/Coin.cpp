@@ -4,17 +4,26 @@
 #include <iostream>
 
 
-Coin::Coin(float size){
-	this->size = size;
-	color = sf::Color::Red;
+Coin::Coin(GameObject::createOptions options){
+	this->size = options.size;
+	this->xPos = options.xPos;
+	this->yPos = options.yPos;
 
-	body.setRadius(this->size);
-	body.setFillColor(sf::Color::Yellow);
+	tx = *options.texture;
 
-	xPos = 200;
-	yPos = 200;
+	
 
-	body.setPosition(xPos - size, yPos - size);
+	sprites[0].setTextureRect(sf::IntRect(0, 0, 64, 64));
+	sprites[1].setTextureRect(sf::IntRect(64, 64, 128, 128));
+	sprites[2].setTextureRect(sf::IntRect(128, 128, 192, 192));
+	sprites[3].setTextureRect(sf::IntRect(192, 192, 256, 256));
+
+	//color = sf::Color::Red;
+
+	//body.setRadius(this->size);
+	//body.setFillColor(sf::Color::Yellow);
+
+	//body.setPosition(xPos - size, yPos - size);
 
 	//std::cout << "Coin Made" << std::endl;
 
@@ -23,12 +32,15 @@ Coin::Coin(float size){
 
 void Coin::Update(float deltaTime){
 	
+	sprites[spriteNum].setPosition(xPos, yPos);
+
+
 }
 
 void Coin::draw(sf::RenderWindow & windowRef){
 
-	body.setPosition(xPos - size, yPos - size);
-	windowRef.draw(body);
+	//body.setPosition(xPos - size, yPos - size);
+	windowRef.draw(sprites[spriteNum]);
 
 }
 
@@ -36,7 +48,19 @@ void Coin::UpdateCollision(){
 
 }
 
+void Coin::createSprites(){
+	/*
+	 = new sf::RectangleShape();
 
+
+
+	sprite.setTexture(tx);
+	sprite.setScale(sf::Vector2f(0.5f, 0.5f));
+	sprite.setOrigin(sf::Vector2f(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2));
+	sprite.setPosition(0, 0);
+	*/
+
+}
 
 float Coin::getXPos(){
 	return xPos;

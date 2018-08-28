@@ -25,7 +25,7 @@ private:
 	void UpdateCollision();
 	void rotate();
 
-	sf::CircleShape body;
+	sf::RectangleShape body;
 	
 	sf::Texture tx;
 	sf::Sprite sprite;

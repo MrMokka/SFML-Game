@@ -6,7 +6,7 @@
 class Coin: public Entity {
 
 public:
-	Coin(float size);
+	Coin(GameObject::createOptions options);
 	void Update(float deltaTime);
 	void draw(sf::RenderWindow& windowRef);
 
@@ -24,8 +24,15 @@ private:
 	float yPos;
 
 	void UpdateCollision();
+	void createSprites();
 
 	sf::CircleShape body;
+
+	sf::Texture tx;
+
+	int spriteNum = 0;
+	float rotationSpeed = 0.25f;
+	sf::Sprite sprites[4];
 
 };
 
