@@ -11,36 +11,32 @@ Coin::Coin(GameObject::createOptions options){
 
 	tx = options.texture;
 
-	//body.setTexture(&textures[0]);
+	body.setTexture(tx);
+	//body.setFillColor(sf::Color::White);
 	body.setSize(sf::Vector2f(size, size));
 	body.setOrigin(sf::Vector2f(size / 2, size / 2));
 	body.setPosition(xPos, yPos);
-
-	sprites[0].setTextureRect(sf::IntRect(0, 0, 64, 64));
-	sprites[1].setTextureRect(sf::IntRect(64, 64, 128, 128));
-	sprites[2].setTextureRect(sf::IntRect(128, 128, 192, 192));
-	sprites[3].setTextureRect(sf::IntRect(192, 192, 256, 256));
-
-	//color = sf::Color::Red;
-
-	//body.setRadius(this->size);
-	//body.setFillColor(sf::Color::Yellow);
-
-	//body.setPosition(xPos - size, yPos - size);
 
 	std::cout << "Coin Made" << std::endl;
 
 }
 
 
-void Coin::Update(float deltaTime){
+void Coin::update(float deltaTime){
 	
 	
 
+	rotationTimer += deltaTime;
+	if(rotationTimer > rotationSpeed){
+		rotationTimer = 0;
+		textureNum++;
+		if(textureNum == 4){
+			textureNum = 0;
+		}
+	}
 
-
-
-	body.setTextureRect(sf::IntRect();
+	
+	body.setTextureRect(sf::IntRect(textureNum * 64, 0, 64, 64));
 	body.setPosition(xPos, yPos);
 
 }

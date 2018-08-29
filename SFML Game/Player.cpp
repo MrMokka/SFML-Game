@@ -14,7 +14,10 @@ Player::Player(GameObject::createOptions options){
 	
 	tx = options.texture;
 
+	tx->setSmooth(true);
+
 	body.setTexture(tx);
+	//body.setFillColor(sf::Color::Red);
 	body.setSize(sf::Vector2f(size, size));
 	body.setOrigin(sf::Vector2f(size / 2, size / 2));
 	body.setPosition(xPos, yPos);
@@ -133,7 +136,7 @@ void Player::collide(std::vector<GameObject*> gameObjects){
 			//std::cout << cX << " : " << cY << " : " << dis << std::endl;
 
 
-			if(dis <= (cS + size)){
+			if(dis <= (cS + size) / 2){
 				//std::cout << "Colliding with coin" << std::endl;
 				c->respawn();
 				Settings::addScore(1);
