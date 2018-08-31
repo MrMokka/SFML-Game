@@ -16,7 +16,7 @@ GameObject::~GameObject(){
 }
 
 void GameObject::draw(sf::RenderWindow& windowRef){
-	std::cout << "Entity Drawing" << std::endl;
+	//std::cout << "Entity Drawing" << std::endl;
 }
 
 void GameObject::update(float deltaTime)

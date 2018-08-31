@@ -14,6 +14,7 @@ public:
 	};
 
 	static GameObject* createObject(Game::ObjectType type, GameObject::createOptions options);
+	static sf::Texture* getTexture(std::string key);
 	
 
 private:
@@ -32,11 +33,12 @@ private:
 	void collisionUpdate();
 	void loadSprites();
 
-	static std::vector<GameObject*> gameObjects;
+	static std::vector<GameObject*> newGameObjects;
+	std::vector<GameObject*> gameObjects;
 
-	sf::Texture* getTexture(std::string key);
+	
 
-	std::map<std::string, sf::Texture> textureMap;
+	static std::map<std::string, sf::Texture> textureMap;
 	std::pair<std::map<std::string, sf::Texture>::iterator, bool> mapResult;
 
 };

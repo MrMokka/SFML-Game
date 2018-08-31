@@ -9,7 +9,8 @@
 #include <iostream>
 
 
-std::vector<GameObject*> Game::gameObjects;
+std::vector<GameObject*> Game::newGameObjects;
+std::map<std::string, sf::Texture> Game::textureMap;
 
 
 void Game::Run() {
@@ -102,19 +103,23 @@ GameObject* Game::createObject(Game::ObjectType type, GameObject::createOptions 
 	switch(type){
 	case Game::ObjectType::PLAYER:
 		obj = new Player(options);
+		//std::cout << "Player Created" << std::endl;
 		break;
 	case Game::ObjectType::COIN:
 		obj = new Coin(options);
+		//std::cout << "Coin Created" << std::endl;
 		break;
 	case Game::ObjectType::BULLET:
 		obj = new Bullet(5.0f);
+		//std::cout << "Bullet Created" << std::endl;
 		break;
 	default:
 		std::cout << "ERROR Creating object!" << std::endl;
+		return nullptr;
 		break;
 	}
 
-	gameObjects.push_back(obj);
+	newGameObjects.push_back(obj);
 
 	return obj;
 }
@@ -124,7 +129,7 @@ sf::Texture* Game::getTexture(std::string key){
 
 	auto search = textureMap.find(key);
 	if(search != textureMap.end()) {
-		std::cout << "Found " << search->first << " " << "texture" << '\n';
+		//std::cout << "Found " << search->first << " " << "texture" << '\n';
 		//test = search->second;
 	}
 	else {
@@ -197,6 +202,12 @@ void Game::drawLoop(sf::RenderWindow& w){
 		e->draw(w);
 	}
 
+	//std::cout << gameObjects.size() << std::endl;
+
+	for(i = newGameObjects.begin(); i != newGameObjects.end(); i++) {
+		gameObjects.push_back(*i);
+	}
+	newGameObjects.clear();
 }
 
 

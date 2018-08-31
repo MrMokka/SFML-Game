@@ -1,6 +1,5 @@
 #include "Player.hpp"
 #include <SFML/Graphics.hpp>
-#include "Coin.hpp"
 #include <cmath>
 #include <iostream>
 
@@ -42,6 +41,39 @@ Player::Player(GameObject::createOptions options){
 
 void Player::update(float deltaTime){
 	MovePlayer(deltaTime);
+
+	shoot(deltaTime);
+
+	
+
+}
+
+void Player::shoot(float deltaTime){
+
+	if(shootTimer > 0){
+		shootTimer -= deltaTime;
+		if(shootTimer < 0){
+			shootTimer = 0;
+		}
+	}
+
+	if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
+		if(shootTimer == 0){
+			shootTimer = shootSpeed;
+
+			GameObject::createOptions options = GameObject::createOptions();
+			options.size = 32;
+			options.xPos = xPos;
+			options.yPos = yPos;
+			options.texture = Game::getTexture("bullet");
+
+			Bullet* b = (Bullet*) Game::createObject(Game::ObjectType::BULLET, options);
+
+			
+		}
+	}
+
+
 }
 
 

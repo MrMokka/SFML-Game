@@ -1,9 +1,10 @@
 #ifndef PLAYER_H
 #define PLAYER_H
 
-//#define M_PI 3.141592653589793238463
-
 #include "Entity.hpp"
+#include "Game.hpp"
+#include "Coin.hpp"
+#include "Bullet.hpp"
 
 class Player: public Entity {
 public:
@@ -20,6 +21,10 @@ private:
 	sf::Vector2f moveDir;
 	float moveSpeed;
 	float moveBonus;
+
+	void shoot(float deltaTime);
+	float shootTimer = 0;
+	float shootSpeed = 1;
 
 	void MovePlayer(float deltaTime);
 	void UpdateCollision();
