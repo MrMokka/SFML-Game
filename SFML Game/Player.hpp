@@ -17,7 +17,7 @@ public:
 private:
 	float size;
 	sf::Color color;
-
+	sf::Vector2f faceDir;
 	sf::Vector2f moveDir;
 	float moveSpeed;
 	float moveBonus;
@@ -33,7 +33,7 @@ private:
 	sf::RectangleShape body;
 	
 	sf::Texture* tx;
-	sf::Sprite sprite;
+	//sf::Sprite sprite;
 
 };
 

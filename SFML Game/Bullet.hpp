@@ -6,11 +6,22 @@
 class Bullet: public Entity {
 
 public:
-	Bullet(float temp);
+	Bullet(GameObject::createOptions options);
 
+	void update(float deltaTime);
+	void draw(sf::RenderWindow & windowRef);
+
+	void setDir(sf::Vector2f direction);
+	void setRotation(float rotDeg);
 
 private:
-	void move();
+	sf::Vector2f moveDir;
+	float moveSpeed;
+	sf::RectangleShape body;
+	sf::Texture* tx;
+	float size;
+
+	void move(float deltaTime);
 
 };
 

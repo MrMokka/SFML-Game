@@ -110,7 +110,7 @@ GameObject* Game::createObject(Game::ObjectType type, GameObject::createOptions 
 		//std::cout << "Coin Created" << std::endl;
 		break;
 	case Game::ObjectType::BULLET:
-		obj = new Bullet(5.0f);
+		obj = new Bullet(options);
 		//std::cout << "Bullet Created" << std::endl;
 		break;
 	default:

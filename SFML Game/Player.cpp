@@ -10,9 +10,7 @@ Player::Player(GameObject::createOptions options){
 	this->size = options.size;
 	this->xPos = options.xPos;
 	this->yPos = options.yPos;
-	
 	tx = options.texture;
-
 	tx->setSmooth(true);
 
 	body.setTexture(tx);
@@ -69,6 +67,8 @@ void Player::shoot(float deltaTime){
 
 			Bullet* b = (Bullet*) Game::createObject(Game::ObjectType::BULLET, options);
 
+			b->setRotation(body.getRotation());
+			b->setDir(faceDir);
 			
 		}
 	}
@@ -97,9 +97,9 @@ void Player::MovePlayer(float deltaTime){
 	sf::Vector2f targetVec = sf::Vector2f((float) mousePos.x, (float) mousePos.y);
 	sf::Vector2f playerVec = sf::Vector2f(xPos, yPos);
 
-	sf::Vector2f facingVec = playerVec - targetVec;
+	faceDir = playerVec - targetVec;
 	
-	float rotation =  atan2(facingVec.x, facingVec.y) * (180 / M_PI);
+	float rotation =  atan2(faceDir.x, faceDir.y) * (180 / M_PI);
 
 	body.setRotation(-rotation);
 
