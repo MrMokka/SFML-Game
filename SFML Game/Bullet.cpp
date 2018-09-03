@@ -40,10 +40,16 @@ void Bullet::setDir(sf::Vector2f direction){
 
 void Bullet::setRotation(float rotDeg){
 	body.setRotation(rotDeg);
+	
+	moveDir.y = -(cos(body.getRotation() * M_PI / 180));
+	moveDir.x = (sin(body.getRotation() * M_PI / 180));
+	
+	//std::cout << "X: " << moveDir.x << " Y: " << moveDir.y << std::endl;
 }
 
 
 void Bullet::move(float deltaTime){
+
 
 	float moveX = moveDir.x * moveSpeed * deltaTime;
 	float moveY = moveDir.y * moveSpeed * deltaTime;
@@ -51,10 +57,13 @@ void Bullet::move(float deltaTime){
 	xPos += moveX;
 	yPos += moveY;
 
-	std::cout << "X: " << moveX << " Y: " << moveY << std::endl;
+	body.setPosition(xPos, yPos);
+
+	//std::cout << "X: " << xPos << " Y: " << yPos << std::endl;
 
 
 
 }
+
 
 

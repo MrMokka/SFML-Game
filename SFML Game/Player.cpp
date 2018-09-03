@@ -3,8 +3,7 @@
 #include <cmath>
 #include <iostream>
 
-#define _USE_MATH_DEFINES
-#include <math.h>
+
 
 Player::Player(GameObject::createOptions options){
 	this->size = options.size;
@@ -68,7 +67,7 @@ void Player::shoot(float deltaTime){
 			Bullet* b = (Bullet*) Game::createObject(Game::ObjectType::BULLET, options);
 
 			b->setRotation(body.getRotation());
-			b->setDir(faceDir);
+			//b->setDir(faceDir);
 			
 		}
 	}
