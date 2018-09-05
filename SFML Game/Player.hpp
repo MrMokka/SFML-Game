@@ -24,7 +24,7 @@ private:
 
 	void shoot(float deltaTime);
 	float shootTimer = 0;
-	float shootSpeed = 1;
+	float shootSpeed = 0.1f;
 
 	void MovePlayer(float deltaTime);
 	void UpdateCollision();

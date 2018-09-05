@@ -55,20 +55,25 @@ void Player::shoot(float deltaTime){
 	}
 
 	if(sf::Mouse::isButtonPressed(sf::Mouse::Left)){
-		if(shootTimer == 0){
-			shootTimer = shootSpeed;
+		int x = sf::Mouse::getPosition(*Settings::getRenderWindow()).x;
+		int y = sf::Mouse::getPosition(*Settings::getRenderWindow()).y;
+		if((x > 0 && x < Settings::getWindowWidth()) && (y > 0 && y < Settings::getWindowHeigth())){
 
-			GameObject::createOptions options = GameObject::createOptions();
-			options.size = 32;
-			options.xPos = xPos;
-			options.yPos = yPos;
-			options.texture = Game::getTexture("bullet");
+			if(shootTimer == 0){
+				shootTimer = shootSpeed;
 
-			Bullet* b = (Bullet*) Game::createObject(Game::ObjectType::BULLET, options);
+				GameObject::createOptions options = GameObject::createOptions();
+				options.size = 32;
+				options.xPos = xPos;
+				options.yPos = yPos;
+				options.texture = Game::getTexture("bullet");
 
-			b->setRotation(body.getRotation());
-			//b->setDir(faceDir);
-			
+				Bullet* b = (Bullet*)Game::createObject(Game::ObjectType::BULLET, options);
+
+				b->setRotation(body.getRotation());
+				//b->setDir(faceDir);
+
+			}
 		}
 	}
 
@@ -128,14 +133,14 @@ void Player::draw(sf::RenderWindow& windowRef){
 
 void Player::UpdateCollision(){
 	
-	if((xPos - size) < 0) xPos = size;
-	if((yPos - size) < 0) yPos = size;
+	if((xPos - (size / 2)) < 0) xPos = size / 2;
+	if((yPos - (size / 2)) < 0) yPos = size / 2;
 
 	int width = Settings::getWindowWidth();
 	int height = Settings::getWindowHeigth();
 
-	if((xPos + size) > width) xPos = width - size;
-	if((yPos + size) > height) yPos = height - size;
+	if((xPos + (size / 2)) > width) xPos = width - size/ 2;
+	if((yPos + (size / 2) ) > height) yPos = height - size / 2;
 	
 }
 

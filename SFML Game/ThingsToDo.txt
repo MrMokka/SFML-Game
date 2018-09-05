@@ -13,7 +13,6 @@
 
 
 
-- Create custom array map? tirsdag 28-aug
 
 
 

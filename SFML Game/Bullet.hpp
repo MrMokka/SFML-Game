@@ -16,7 +16,7 @@ public:
 
 private:
 	sf::Vector2f moveDir;
-	float moveSpeed = 200.0f;
+	float moveSpeed = 100.0f;
 	sf::RectangleShape body;
 	sf::Texture* tx;
 	float size;

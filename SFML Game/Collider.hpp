@@ -8,6 +8,8 @@ class Collider {
 public:
 	Collider();
 
+	virtual bool isColliding(Collider c);
+
 private:
 
 
