@@ -4,6 +4,7 @@ int Settings::WINDOW_WIDTH;
 int Settings::WINDOW_HEIGHT;
 int Settings::score;
 sf::RenderWindow* Settings::rWindow;
+bool Settings::drawCols;
 
 Settings::Settings(){
 
@@ -23,6 +24,14 @@ int Settings::getWindowWidth(){
 
 int Settings::getWindowHeigth(){
 	return WINDOW_HEIGHT;
+}
+
+void Settings::setDrawColliders(bool draw){
+	drawCols = draw;
+}
+
+bool Settings::drawColliders(){
+	return drawCols;
 }
 
 void Settings::addScore(int x){

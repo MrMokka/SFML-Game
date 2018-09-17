@@ -18,14 +18,18 @@ Player::Player(GameObject::createOptions options){
 	body.setOrigin(sf::Vector2f(size / 2, size / 2));
 	body.setPosition(xPos, yPos);
 
-	//body.setRadius(this->size);
+	BoxCollider::coordinates c;
+	c.center = sf::Vector2f(xPos, yPos);
+	c.x1 = -(size / 3);
+	c.y1 = -(size / 3);
+	c.x2 = (size / 3);
+	c.y2 = (size / 3);
 
-	/*
-	sprite.setTexture(tx);
-	sprite.setScale(sf::Vector2f(0.5f, 0.5f));
-	sprite.setOrigin(sf::Vector2f(sprite.getLocalBounds().width / 2, sprite.getLocalBounds().height / 2));
-	sprite.setPosition(0, 0);
-	*/
+	bc = BoxCollider(c);
+
+
+
+
 	
 
 	moveSpeed = 150;
@@ -128,10 +132,18 @@ void Player::draw(sf::RenderWindow& windowRef){
 	windowRef.draw(body);
 	//windowRef.draw(sprite);
 
+	if(Settings::drawColliders()){
+		bc.drawCollider(windowRef);
+	}
+
 }
 
 
 void Player::UpdateCollision(){
+
+
+
+	bc.updateCollider(sf::Vector2f(xPos, yPos), body.getRotation());
 	
 	if((xPos - (size / 2)) < 0) xPos = size / 2;
 	if((yPos - (size / 2)) < 0) yPos = size / 2;
@@ -152,6 +164,34 @@ void Player::rotate(){
 
 void Player::collide(std::vector<GameObject*> gameObjects){
 
+	for(int i = 0; i < gameObjects.size(); i++){
+
+		if(gameObjects[i] == this){
+			//std::cout << "Found itself" << std::endl;
+			continue;
+		}
+
+		Coin* c = dynamic_cast<Coin*>(gameObjects[i]);
+		if(c != nullptr){
+			//std::cout << "Found Coin!" << std::endl;
+
+
+			//std::cout << collider.isColliding(c->getCollider()) << std::endl;
+			
+
+			if(bc.isColliding(c->getCollider())){
+				//std::cout << "Colliding with coin" << std::endl;
+				c->respawn();
+				Settings::addScore(1);
+			}
+
+		}
+
+	}
+	
+
+
+	/*
 	for(int i = 0; i < gameObjects.size(); i++) {
 		//std::cout << entities[i] << std::endl;
 		//std::cout << this << std::endl;
@@ -182,6 +222,9 @@ void Player::collide(std::vector<GameObject*> gameObjects){
 
 		//typeid(entities[i])
 	}
+	*/
+
+	
 
 }
 

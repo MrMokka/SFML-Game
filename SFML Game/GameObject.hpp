@@ -4,6 +4,8 @@
 #include "Settings.hpp"
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "BoxCollider.hpp"
+#include <string>
 
 #define _USE_MATH_DEFINES
 #include <math.h>
@@ -20,6 +22,8 @@ public:
 	virtual void update(float deltaTime);
 	virtual void collide(std::vector<GameObject*> gameObjects);
 
+	BoxCollider getCollider();
+
 	struct createOptions{
 		float xPos = 0;
 		float yPos = 0;
@@ -35,6 +39,8 @@ private:
 protected:
 	float xPos;
 	float yPos;
+
+	BoxCollider bc;
 
 
 };

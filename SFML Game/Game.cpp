@@ -18,6 +18,7 @@ void Game::Run() {
 	sf::RenderWindow window(sf::VideoMode(Settings::getWindowWidth(), Settings::getWindowHeigth()), "First Window", sf::Style::Titlebar | sf::Style::Close);
 
 	Settings::setRenderWindow(&window);
+	Settings::setDrawColliders(true);
 
 	window.setFramerateLimit(60);
 

@@ -12,7 +12,10 @@
 
 
 
-
+-- Bullet
+- Damage value
+- Collider
+- Owner
 
 
 

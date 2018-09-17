@@ -26,3 +26,7 @@ void GameObject::update(float deltaTime)
 void GameObject::collide(std::vector<GameObject*> gameObjects){
 
 }
+
+BoxCollider GameObject::getCollider(){
+	return bc;
+}

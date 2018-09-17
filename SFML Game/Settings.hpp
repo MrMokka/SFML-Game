@@ -14,6 +14,9 @@ public:
 	static int getWindowWidth();
 	static int getWindowHeigth();
 
+	static void setDrawColliders(bool draw);
+	static bool drawColliders();
+
 	static void addScore(int x);
 	static int getScore();
 
@@ -27,6 +30,8 @@ private:
 	static int score;
 
 	static sf::RenderWindow* rWindow;
+
+	static bool drawCols;
 	
 };
 
