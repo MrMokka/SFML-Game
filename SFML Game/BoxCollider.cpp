@@ -1,5 +1,5 @@
 #include "BoxCollider.hpp"
-
+#include "Collider.hpp"
 
 BoxCollider::BoxCollider(){}
 

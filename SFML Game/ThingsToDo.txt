@@ -21,5 +21,40 @@
 
 
 
+Collider
+-BoxCollider
+-CircleCollider
+
+
+
+Collider:
+	bool colliding(Collider, Collider)
+	vector<Collider> collidingWith;
+	
+	protected:
+	struct Center{
+		float x, y;
+	}
+
+
+BoxCollider:
+	bool rotateable;
+
+
+	float[] xp = new float[4];
+	float[] yp = new float[4];
+
+	if(!rotateable)
+		AABB
+	else
+		"Example from web"
+	
+
+
+
+CircleCollider:
+	float radius;
+
+
 
 

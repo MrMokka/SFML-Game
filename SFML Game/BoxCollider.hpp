@@ -4,7 +4,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
 
-class BoxCollider {
+class BoxCollider: public Collider {
 
 public:
 
@@ -30,9 +30,19 @@ public:
 
 	coordinates getCordinates();
 
-	
+	struct Corners{
+		float[] xp[4];
+		float[] yp[4];
+	};
+
+	void setCorners(Corners corners);
 
 private:
+
+	bool rotateable;
+	float[] xp[4];
+	float[] yp[4];
+
 	coordinates co;
 	
 	sf::RectangleShape r;
