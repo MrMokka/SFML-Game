@@ -3,14 +3,13 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "BoxCollider.hpp"
 
 
 class Collider {
 public:
 	Collider();
 
-	bool colliding(Collider col1, Collider col2);
+	virtual bool isColliding(Collider other);
 	void setCenter(sf::Vector2f center);
 
 private:
@@ -18,6 +17,9 @@ private:
 	std::vector<Collider> colidingWith;
 
 protected:
+	
+	bool AABBColliding(Collider colA, Collider colB);
+
 
 	sf::Vector2f center;
 

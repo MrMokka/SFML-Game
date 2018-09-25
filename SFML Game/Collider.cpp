@@ -5,17 +5,15 @@ Collider::Collider(){
 
 }
 
-bool Collider::colliding(Collider col1, Collider col2){
-	
-	//BoxCollider* bc = dynamic_cast<BoxCollider*>(&col1);
-
-
-
-	
+bool Collider::isColliding(Collider other){
 	return false;
 }
 
 void Collider::setCenter(sf::Vector2f center){
 	this->center = center;
+}
+
+bool Collider::AABBColliding(Collider colA, Collider colB){
+	return false;
 }
 

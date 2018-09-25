@@ -31,8 +31,19 @@ BoxCollider::BoxCollider(BoxCollider::coordinates co){
 }
 
 
-bool BoxCollider::isColliding(BoxCollider c){
+bool BoxCollider::isColliding(Collider other){
 
+	BoxCollider* bc = dynamic_cast<BoxCollider*>(&other);
+
+	if(bc != nullptr){
+		if(bc->isRotated()){
+
+		}
+		return AABBColliding(*this, *bc);
+	}
+
+
+	/*
 	coordinates oCol = c.getCordinates();
 
 	float x1 = oCol.center.x + oCol.x1;
@@ -54,7 +65,11 @@ bool BoxCollider::isColliding(BoxCollider c){
 		}
 
 	}
+	*/
+	return false;
+}
 
+bool BoxCollider::isColliding(Collider other){
 	return false;
 }
 

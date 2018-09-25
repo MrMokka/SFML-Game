@@ -24,15 +24,17 @@ public:
 	BoxCollider();
 	BoxCollider(coordinates co);
 
-	bool isColliding(BoxCollider c);
+	bool isColliding(Collider other);
 	void updateCollider(sf::Vector2f center, float rotation);
 	void drawCollider(sf::RenderWindow& windowRef);
+
+	bool isRotated(){ return rotated; }
 
 	coordinates getCordinates();
 
 	struct Corners{
-		float[] xp[4];
-		float[] yp[4];
+		float xp[4];
+		float yp[4];
 	};
 
 	void setCorners(Corners corners);
@@ -40,8 +42,9 @@ public:
 private:
 
 	bool rotateable;
-	float[] xp[4];
-	float[] yp[4];
+	float xp[4];
+	float yp[4];
+	bool rotated;
 
 	coordinates co;
 	
