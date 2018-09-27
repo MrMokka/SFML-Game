@@ -1,5 +1,4 @@
 #include "BoxCollider.hpp"
-#include "Collider.hpp"
 
 BoxCollider::BoxCollider(){}
 
@@ -66,10 +65,6 @@ bool BoxCollider::isColliding(Collider other){
 
 	}
 	*/
-	return false;
-}
-
-bool BoxCollider::isColliding(Collider other){
 	return false;
 }
 

@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <SFML/Graphics.hpp>
+#include "Collider.hpp"
 
 class BoxCollider: public Collider {
 
