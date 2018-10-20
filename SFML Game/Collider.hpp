@@ -12,15 +12,12 @@ public:
 	virtual bool isColliding(Collider other);
 	void setCenter(sf::Vector2f center);
 
-private:
-
-	std::vector<Collider> colidingWith;
 
 protected:
 	
-	bool AABBColliding(Collider colA, Collider colB);
+	//bool AABBColliding(BoxCollider colA, BoxCollider colB);
 
-
+	std::vector<Collider> colidingWith;
 	sf::Vector2f center;
 
 };

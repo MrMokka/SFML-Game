@@ -213,13 +213,11 @@ void Game::drawLoop(sf::RenderWindow& w){
 
 
 void Game::objectLoop(){
-
 	std::vector<GameObject*>::const_iterator i;
 	for(i = gameObjects.begin(); i != gameObjects.end(); i++) {
 		GameObject* e = *i;
 		e->update(deltaTime);
 	}
-
 }
 
 

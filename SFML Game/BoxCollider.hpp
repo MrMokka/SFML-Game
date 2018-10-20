@@ -8,51 +8,50 @@
 class BoxCollider: public Collider {
 
 public:
+	
+	struct Offset{
+		float yTop, yBottom, xLeft, xRight;
+	};
 
-	///////
-	/// Coordinates of the bounding box for a boxCollider
-	/// x1, y1 is top left corner
-	/// x2, y2 is bottom right corner of bounding box
-	//////
-	struct coordinates{
-		sf::Vector2f center;
-		float x1 = 0;
-		float y1 = 0;
-		float x2 = 0;
-		float y2 = 0;
+	struct Sides{
+		float top, right, bottom, left;
+	};
+
+	struct Corners{
+		//Top Left, Top Right, Bottom Left, Bottom Right
+		sf::Vector2f topLeft, topRight, botLeft, botRight;
 	};
 
 	BoxCollider();
-	BoxCollider(coordinates co);
+	BoxCollider(Offset off, sf::Vector2f center);
 
-	bool isColliding(Collider other);
-	void updateCollider(sf::Vector2f center, float rotation);
+	bool isColliding(Collider* other);
+	void updateCollider(sf::Vector2f center);
 	void drawCollider(sf::RenderWindow& windowRef);
 
 	bool isRotated(){ return rotated; }
+	Corners getCorners(){ return corners; }
+	Sides getSides(){ return sides; }
 
-	coordinates getCordinates();
-
-	struct Corners{
-		float xp[4];
-		float yp[4];
-	};
-
-	void setCorners(Corners corners);
 
 private:
 
-	bool rotateable;
-	float xp[4];
-	float yp[4];
-	bool rotated;
+	bool AABBColliding(BoxCollider other);
 
-	coordinates co;
+	bool rotateable;
+	bool rotated;
 	
 	sf::RectangleShape r;
 	sf::ConvexShape colBox;
-	float x, y , xs, ys;
 
+	//Corners of the collision box
+	Corners corners;
+	//Offset from the middle (to each edge is compined by 2 offsets)
+	Offset offset;
+	//Single side of the box, top side is only y coord
+	Sides sides;
+	//Center of the collision box
+	sf::Vector2f center;
 
 };
 

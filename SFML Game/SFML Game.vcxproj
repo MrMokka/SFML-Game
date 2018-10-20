@@ -164,6 +164,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Settings.cpp" />
+    <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="BoxCollider.hpp" />
@@ -175,6 +176,7 @@
     <ClInclude Include="GameObject.hpp" />
     <ClInclude Include="Player.hpp" />
     <ClInclude Include="Settings.hpp" />
+    <ClInclude Include="Wall.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="ThingsToDo.txt" />

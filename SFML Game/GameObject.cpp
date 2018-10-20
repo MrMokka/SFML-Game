@@ -27,6 +27,6 @@ void GameObject::collide(std::vector<GameObject*> gameObjects){
 
 }
 
-BoxCollider GameObject::getCollider(){
-	return bc;
+BoxCollider* GameObject::getCollider(){
+	return &bc;
 }

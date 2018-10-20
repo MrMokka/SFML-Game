@@ -22,7 +22,7 @@ public:
 	virtual void update(float deltaTime);
 	virtual void collide(std::vector<GameObject*> gameObjects);
 
-	BoxCollider getCollider();
+	BoxCollider* getCollider();
 
 	struct createOptions{
 		float xPos = 0;

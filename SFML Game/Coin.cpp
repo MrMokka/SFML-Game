@@ -16,15 +16,21 @@ Coin::Coin(GameObject::createOptions options){
 	body.setSize(sf::Vector2f(size, size));
 	body.setOrigin(sf::Vector2f(size / 2, size / 2));
 	body.setPosition(xPos, yPos);
-
+	/*
 	BoxCollider::coordinates c;
 	c.center = sf::Vector2f(xPos, yPos);
 	c.x1 = -(size / 2);
 	c.y1 = -(size / 2);
 	c.x2 = (size / 2);
 	c.y2 = (size / 2);
+	*/
+	BoxCollider::Offset offset;
+	offset.yTop = -(size / 2);
+	offset.yBottom = (size / 2);
+	offset.xLeft = -(size / 2);
+	offset.xRight = (size / 2);
 
-	bc = BoxCollider(c);
+	bc = BoxCollider(offset, sf::Vector2f(xPos, yPos));
 
 	std::cout << "Coin Made" << std::endl;
 
@@ -48,7 +54,7 @@ void Coin::update(float deltaTime){
 	body.setTextureRect(sf::IntRect(textureNum * 64, 0, 64, 64));
 	body.setPosition(xPos, yPos);
 
-	bc.updateCollider(sf::Vector2f(xPos, yPos), body.getRotation());
+	bc.updateCollider(sf::Vector2f(xPos, yPos));
 
 }
 

@@ -17,15 +17,21 @@ Player::Player(GameObject::createOptions options){
 	body.setSize(sf::Vector2f(size, size));
 	body.setOrigin(sf::Vector2f(size / 2, size / 2));
 	body.setPosition(xPos, yPos);
-
+	/*
 	BoxCollider::coordinates c;
 	c.center = sf::Vector2f(xPos, yPos);
 	c.x1 = -(size / 3);
 	c.y1 = -(size / 3);
 	c.x2 = (size / 3);
 	c.y2 = (size / 3);
+	*/
+	BoxCollider::Offset offset;
+	offset.yTop = -(size / 3);
+	offset.yBottom = (size / 3);
+	offset.xLeft = -(size / 3);
+	offset.xRight = (size / 3);
 
-	bc = BoxCollider(c);
+	bc = BoxCollider(offset, sf::Vector2f(xPos, yPos));
 
 
 
@@ -143,7 +149,7 @@ void Player::UpdateCollision(){
 
 
 
-	bc.updateCollider(sf::Vector2f(xPos, yPos), body.getRotation());
+	bc.updateCollider(sf::Vector2f(xPos, yPos));
 	
 	if((xPos - (size / 2)) < 0) xPos = size / 2;
 	if((yPos - (size / 2)) < 0) yPos = size / 2;
